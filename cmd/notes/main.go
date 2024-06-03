@@ -9,6 +9,8 @@ import (
     "errors"
 
     "github.com/solloball/aws_tg/internal/config"
+    "github.com/solloball/aws_tg/internal/storage/sqlite"
+    "github.com/solloball/aws_tg/internal/logger/sl"
 )
 
 const (
@@ -27,7 +29,15 @@ func main() {
     logger.Info("start notes", slog.String("env", conf.Env))
     logger.Debug("debug mode is enabled")
 
-    //TODO: init storage
+    st, err := sqlite.New(conf.StoragePath)
+    if err != nil {
+        logger.Error("failed to init storage", sl.Err(err))
+        os.Exit(1)
+    }
+
+
+
+    _ = st
 
     //TODO: init router
 

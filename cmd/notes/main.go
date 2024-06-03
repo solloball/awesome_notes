@@ -8,6 +8,9 @@ import (
     "os"
     "errors"
 
+    "github.com/go-chi/chi/v5"
+    "github.com/go-chi/chi/v5/middleware"
+
     "github.com/solloball/aws_tg/internal/config"
     "github.com/solloball/aws_tg/internal/storage/sqlite"
     "github.com/solloball/aws_tg/internal/logger/sl"
@@ -35,11 +38,18 @@ func main() {
         os.Exit(1)
     }
 
-
-
+    // TODO:: remove this
     _ = st
 
-    //TODO: init router
+    router := chi.NewRouter()
+    router.Use(middleware.RequestID)
+    router.Use(middleware.RealIP)
+    // TODO:: refactor this
+    router.Use(middleware.Logger)
+    router.Use(middleware.Recoverer)
+    router.Use(middleware.URLFormat)
+
+
 
     //TODO: run server
 }

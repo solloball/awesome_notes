@@ -89,3 +89,6 @@ func (s *Storage) GetRecord(alias string) (storage.Record, error) {
 
     return res, nil
 }
+
+// TODO:: implement this
+// func (s *Storage) DeleteRecord(alias string) (storage.Record, error)

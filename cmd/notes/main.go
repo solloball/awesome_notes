@@ -15,6 +15,7 @@ import (
     "github.com/solloball/aws_tg/internal/config"
     "github.com/solloball/aws_tg/internal/storage/sqlite"
     "github.com/solloball/aws_tg/internal/http-server/handlers/record/save"
+    "github.com/solloball/aws_tg/internal/http-server/handlers/record/get"
     "github.com/solloball/aws_tg/internal/logger/sl"
 )
 
@@ -50,7 +51,7 @@ func main() {
 
 
     router.Post("/record", save.New(logger, storage))
-    router.Get("/{alias}", take.New(logger, storage))
+    router.Get("/{alias}", get.New(logger, storage))
 
     logger.Info("starting server", slog.String("address", conf.Address))
 

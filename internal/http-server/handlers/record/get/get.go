@@ -1,4 +1,4 @@
-package take
+package get
 
 import (
     "log/slog"
@@ -59,5 +59,7 @@ func New(log *slog.Logger, recordGetter RecordGetter) http.HandlerFunc {
             slog.String("title", resRecord.Title),
             slog.String("note", resRecord.Note),
         )
+
+        render.JSON(w, r, resRecord)
     }
 }

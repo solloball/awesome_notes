@@ -50,6 +50,7 @@ func main() {
 
 
     router.Post("/record", save.New(logger, storage))
+    router.Get("/{alias}", take.New(logger, storage))
 
     logger.Info("starting server", slog.String("address", conf.Address))
 

@@ -7,12 +7,14 @@ import (
     "log"
     "os"
     "errors"
+    "net/http"
 
     "github.com/go-chi/chi/v5"
     "github.com/go-chi/chi/v5/middleware"
 
     "github.com/solloball/aws_tg/internal/config"
     "github.com/solloball/aws_tg/internal/storage/sqlite"
+    "github.com/solloball/aws_tg/internal/http-server/handlers/record/save"
     "github.com/solloball/aws_tg/internal/logger/sl"
 )
 
@@ -32,14 +34,11 @@ func main() {
     logger.Info("start notes", slog.String("env", conf.Env))
     logger.Debug("debug mode is enabled")
 
-    st, err := sqlite.New(conf.StoragePath)
+    storage, err := sqlite.New(conf.StoragePath)
     if err != nil {
         logger.Error("failed to init storage", sl.Err(err))
         os.Exit(1)
     }
-
-    // TODO:: remove this
-    _ = st
 
     router := chi.NewRouter()
     router.Use(middleware.RequestID)
@@ -50,8 +49,23 @@ func main() {
     router.Use(middleware.URLFormat)
 
 
+    router.Post("/record", save.New(logger, storage))
 
-    //TODO: run server
+    logger.Info("starting server", slog.String("address", conf.Address))
+
+    server := &http.Server{
+        Addr: conf.Address,
+        Handler: router,
+        ReadTimeout: conf.Timeout,
+        WriteTimeout: conf.Timeout,
+        IdleTimeout: conf.IdleTimeout,
+    }
+
+    if err := server.ListenAndServe(); err != nil {
+        logger.Error("failed to start server")
+    }
+
+    logger.Error("server stopped")
 }
 
 func setupLogger(env string) (*slog.Logger, error) {

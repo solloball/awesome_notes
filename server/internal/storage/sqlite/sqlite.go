@@ -6,7 +6,7 @@ import (
     "errors"
 
     _ "github.com/mattn/go-sqlite3"
-    "github.com/solloball/aws_tg/internal/storage"
+    "github.com/solloball/aws_note/internal/storage"
 )
 
 type Storage struct {

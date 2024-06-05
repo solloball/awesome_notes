@@ -9,10 +9,10 @@ import (
     "github.com/go-chi/chi/v5/middleware"
     "github.com/go-chi/render"
 
-    "github.com/solloball/aws_tg/internal/storage"
-    "github.com/solloball/aws_tg/internal/logger/sl"
-    "github.com/solloball/aws_tg/internal/lib/api/response"
-    "github.com/solloball/aws_tg/internal/lib/random"
+    "github.com/solloball/aws_note/internal/storage"
+    "github.com/solloball/aws_note/internal/logger/sl"
+    "github.com/solloball/aws_note/internal/lib/api/response"
+    "github.com/solloball/aws_note/internal/lib/random"
 )
 
 type Request struct {

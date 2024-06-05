@@ -12,11 +12,11 @@ import (
     "github.com/go-chi/chi/v5"
     "github.com/go-chi/chi/v5/middleware"
 
-    "github.com/solloball/aws_tg/internal/config"
-    "github.com/solloball/aws_tg/internal/storage/sqlite"
-    "github.com/solloball/aws_tg/internal/http-server/handlers/record/save"
-    "github.com/solloball/aws_tg/internal/http-server/handlers/record/get"
-    "github.com/solloball/aws_tg/internal/logger/sl"
+    "github.com/solloball/aws_note/internal/config"
+    "github.com/solloball/aws_note/internal/storage/sqlite"
+    "github.com/solloball/aws_note/internal/http-server/handlers/record/save"
+    "github.com/solloball/aws_note/internal/http-server/handlers/record/get"
+    "github.com/solloball/aws_note/internal/logger/sl"
 )
 
 const (

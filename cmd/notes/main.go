@@ -49,9 +49,18 @@ func main() {
     router.Use(middleware.Recoverer)
     router.Use(middleware.URLFormat)
 
+    router.Route("/record", func(r chi.Router) {
+        r.Use(middleware.BasicAuth("aws_note", map[string]string{
+            conf.HttpServer.User: conf.HttpServer.Password,
+        }))
+        
+        r.Post("/", save.New(logger, storage))
+        // TODO: add delete
+    })
 
-    router.Post("/record", save.New(logger, storage))
     router.Get("/{alias}", get.New(logger, storage))
+    // TODO: implement this
+    //router.Delete("/record/{alias}, delete.New(logger, storage))
 
     logger.Info("starting server", slog.String("address", conf.Address))
 

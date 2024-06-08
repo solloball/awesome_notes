@@ -47,7 +47,7 @@ class AddNote extends React.Component {
                     console.log(json);
 
                     // send data to server
-                    fetch(Url + "record", {
+                    fetch(Url + "/record", {
                     method: "POST",
                     body: json,
                     headers: {

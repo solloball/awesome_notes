@@ -1,6 +1,5 @@
 import React from "react";
-
-const url = "http://localhost:8082/"
+import Url from "./App.js"
 
 class AddNote extends React.Component {
     constructor(props) {
@@ -48,7 +47,7 @@ class AddNote extends React.Component {
                     console.log(json);
 
                     // send data to server
-                    fetch(url + "record", {
+                    fetch(Url + "record", {
                     method: "POST",
                     body: json,
                     headers: {

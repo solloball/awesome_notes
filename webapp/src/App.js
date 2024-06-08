@@ -2,10 +2,10 @@ import './App.css';
 import React from 'react';
 import AddNote from './addNote';
 
+
+export const Url = "http://localhost:8082/"
+
 export class App extends React.Component {
- constructor(props) {
-     super(props);
- }
  render() {
   return (
     <div className="App">

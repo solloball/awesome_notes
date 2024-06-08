@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+
+}
+
+body {
+    background: #555;
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 300;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+    font-weight: 600;
+    background-color: #333;
+    margin-bottom: 10px;
+    padding: 30px 100px;
+    color: #fff;
+    font-size: 50px;
+}
+
+aside form input, aside form textarea, aside form button {
+    text-align: center;
+    width: 90%;
+    padding: 20px, 10%;
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    margin-bottom: 10px;
+    border: 0;
+    color : #000;
+    outline: none;
+    font-size: 35px;
+}
+
+aside form button {
+    cursor: pointer;
+    transition: transform 500ms ease;
+}
+
+aside form button:hover {
+    transform: scale(1.05);
+}

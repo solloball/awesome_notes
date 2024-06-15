@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
-//import {Url} from "./App.js"
-const Url = "http://localhost:8082"
+import Url from "./Constants.js"
 
 class Note extends React.Component {
     constructor(props) {
@@ -14,26 +13,31 @@ class Note extends React.Component {
         };
 
         let alias = window.location.href.toString().split(window.location.host)[1];
-        axios.get(Url + alias).then((res) => {
+        axios.get(Url.Url + alias).then((res) => {
+            if (res.data.status === "Error") {
+                this.setState({
+                    author: "Author not found",
+                    note: "Note not found",
+                    title: "Title not found"
+                });
+                return;
+            }
             this.setState({
                 author: res.data.Author,
                 note: res.data.Note,
                 title: res.data.Title
             });
-        }).catch(function (error) {
-            console.log(error)
-        });
+        })
 
     }
     render() {
         return (
             <div>
-            <h1>Title:</h1>
-            <h2>{this.state.title}</h2>
-            <h1>Note:</h1>
-            <h2>{this.state.note}</h2>
-            <h1>Author:</h1>
-            <h2>{this.state.author}</h2>
+            <div>{this.state.title}</div>
+            <h2>Note:</h2>
+            <div>{this.state.note}</div>
+            <h4>Author:</h4>
+            <div>{this.state.author}</div>
             </div>
         );
     }

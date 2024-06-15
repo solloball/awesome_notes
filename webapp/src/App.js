@@ -3,8 +3,6 @@ import React from 'react';
 import AddNote from './addNote';
 import Note from './Note';
 
-// TODO: add to config
-//const Url = "http://localhost:8082"
 
 class App extends React.Component {
  render() {

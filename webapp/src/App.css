@@ -11,6 +11,7 @@ body {
     font-family: "JetBrains Mono", monospace;
     font-optical-sizing: auto;
     font-weight: 300;
+    font-size: 28px;
 }
 
 .App {
@@ -23,7 +24,7 @@ body {
     margin-bottom: 10px;
     padding: 30px 100px;
     color: #fff;
-    font-size: 50px;
+    font-size: 100px;
 }
 
 aside form input, aside form textarea, aside form button {

@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import AddNote from './addNote';
+import AddNote from './AddNote';
 import Note from './Note';
 
 

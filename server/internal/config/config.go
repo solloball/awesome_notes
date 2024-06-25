@@ -13,6 +13,8 @@ type Config struct {
     Env string `yaml:"env" env-required:"true"`
     StoragePath string `yaml:"sttorage_path" env-required:"true"` 
     HttpServer `yaml:"http_server"`
+    Clients ClientsConf `yaml:"clients"`
+    AppSecret string `yaml:"app_secret" env-required:"true" env:"APP_SECRE"`
 }
 
 type HttpServer struct {
@@ -46,4 +48,14 @@ func MustLoad() Config {
     }
 
     return conf
+}
+
+type ClientConf struct {
+    Address string `yaml:"address"`
+    Timeout time.Duration `yaml:"timeout" env-default:"10s"`
+    RetriesCount int `yaml:"retries_count"`
+}
+
+type ClientsConf struct {
+    SSO ClientConf `yaml:"sso"`
 }

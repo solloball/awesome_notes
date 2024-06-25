@@ -8,6 +8,7 @@ import (
     "os"
     "errors"
     "net/http"
+    "context"
 
     "github.com/go-chi/chi/v5"
     "github.com/go-chi/chi/v5/middleware"
@@ -18,6 +19,7 @@ import (
     "github.com/solloball/aws_note/internal/http-server/handlers/record/save"
     "github.com/solloball/aws_note/internal/http-server/handlers/record/get"
     "github.com/solloball/aws_note/internal/logger/sl"
+    ssogrpc "github.com/solloball/aws_note/internal/sso/grpc"
 )
 
 const (
@@ -59,17 +61,17 @@ func main() {
         MaxAge:           300, // Maximum value not ignored by any of major browsers
     }))
 
-    // TODO:: make better auth (JWT??)
-    /*
-    router.Route("/record", func(r chi.Router) {
-        r.Use(middleware.BasicAuth("aws_note", map[string]string{
-            conf.HttpServer.User: conf.HttpServer.Password,
-        }))
-        
-        r.Post("/", save.New(logger, storage))
-        // TODO: add delete
-    })
-    */
+    ssoclient, err := ssogrpc.New(
+        context.Background(),
+        logger,
+        conf.Clients.SSO.Address,
+        conf.Clients.SSO.Timeout,
+        conf.Clients.SSO.RetriesCount,
+    )
+    if err != nil {
+        logger.Error("failed to init sso client", sl.Err(err))
+        os.Exit(1)
+    }
 
     router.Post("/record", save.New(logger, storage))
     router.Get("/{alias}", get.New(logger, storage))

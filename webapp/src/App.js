@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
-import AddNote from './AddNote';
-import Note from './Note';
+import AddNote from './notes/AddNote';
+import Note from './notes/Note';
 
 
 class App extends React.Component {

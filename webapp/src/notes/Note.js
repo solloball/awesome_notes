@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import Url from "./Constants.js"
+import Url from "../Constants.js"
 
 class Note extends React.Component {
     constructor(props) {

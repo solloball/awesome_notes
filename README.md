@@ -1,4 +1,4 @@
-# awesome_notes
+# awesome notes
 A web apllication that allows to make simple note.
 Server is made with REST API on go
 It allows:
@@ -8,21 +8,11 @@ It allows:
 4. Change note (coming soon)
 
 # System requirements
-Yoy have to have installed golang and npm
+Yoy have to have installed docker and docker-compose
 
 # How to build and run in production mode
 
-* Server
 
 ```sh
-cd server
-go run cmd/notes/main.go
-```
-
-* Web app
-
-```sh
-cd webapp
-npm install
-npm start
+docker-compose up
 ```

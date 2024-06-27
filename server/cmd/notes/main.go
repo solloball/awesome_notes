@@ -59,20 +59,10 @@ func main() {
         MaxAge:           300, // Maximum value not ignored by any of major browsers
     }))
 
-    // TODO:: make better auth (JWT??)
-    /*
-    router.Route("/record", func(r chi.Router) {
-        r.Use(middleware.BasicAuth("aws_note", map[string]string{
-            conf.HttpServer.User: conf.HttpServer.Password,
-        }))
-        
-        r.Post("/", save.New(logger, storage))
-        // TODO: add delete
-    })
-    */
 
-    router.Post("/record", save.New(logger, storage))
-    router.Get("/{alias}", get.New(logger, storage))
+    router.Post("/api/record", save.New(logger, storage))
+    router.Get("/api/{alias}", get.New(logger, storage))
+
     // TODO: implement this
     //router.Delete("/record/{alias}, delete.New(logger, storage))
 

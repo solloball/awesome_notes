@@ -7,9 +7,9 @@ class Note extends React.Component {
         super(props)
 
         this.state = {
-            author: "user",
-            note: "note",
-            title: "Test title"
+            author: "empty",
+            note: "empty",
+            title: "empty"
         };
 
         let alias = window.location.href.toString().split(window.location.host)[1];

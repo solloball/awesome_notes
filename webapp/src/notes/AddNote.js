@@ -28,6 +28,8 @@ class AddNote extends React.Component {
                     (e) => this.setState({alias: e.target.value})
                 }/>
                 <button type="button" onClick={() => {
+                    console.log(Url.Url);
+                    console.log(123);
                     if (this.state.title === ""
                         || this.state.note === ""
                         || this.state.author === ""

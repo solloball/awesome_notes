@@ -1,7 +1,6 @@
 import React from "react";
-import Url from "./Constants.js"
 
-class AddNote extends React.Component {
+class AddNotes extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -45,12 +44,7 @@ class AddNote extends React.Component {
                         alias: this.state.alias,
                     });
 
-                    // send data to server
-                    //const url = "http://localhost:8082/"
-
-                    console.log(Url.Url);
-                    // TODO: Url uncorrect
-                    fetch(Url.Url + "/record", {
+                    fetch("api/record", {
                     method: "POST",
                     body: json,
                     headers: {
@@ -73,4 +67,4 @@ class AddNote extends React.Component {
     }
 }
 
-export default AddNote
+export default AddNotes

@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  client:
+    image: client
+    ports: 
+      - "5001:3000"
+    build:
+      context: ./webapp
+      dockerfile: Dockerfile
+  backend:
+    image: server
+    ports: 
+      - "5000:8080"
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+  proxy:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - './docker/nginx/conf.d/default.conf:/etc/nginx/nginx.conf'

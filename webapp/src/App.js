@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
-import AddNote from './AddNote';
-import Note from './Note';
+import AddNotes from './notes/AddNotes';
+import GetNotes from './notes/GetNotes';
 
 
 class App extends React.Component {
@@ -16,7 +16,7 @@ class App extends React.Component {
             <div>Pretty note</div>
             </header>
             <aside>
-            <Note />
+            <GetNotes />
             </aside>
             </div>
         );
@@ -29,7 +29,7 @@ class App extends React.Component {
       <div>Pretty note</div>
       </header>
       <aside>
-        <AddNote />
+        <AddNotes />
       </aside>
     </div>
   );

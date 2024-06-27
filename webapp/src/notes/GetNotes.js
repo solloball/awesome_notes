@@ -1,19 +1,18 @@
 import React from "react";
 import axios from "axios";
-import Url from "./Constants.js"
 
-class Note extends React.Component {
+class GetNotes extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            author: "user",
-            note: "note",
-            title: "Test title"
+            author: "empty",
+            note: "empty",
+            title: "empty"
         };
 
         let alias = window.location.href.toString().split(window.location.host)[1];
-        axios.get(Url.Url + alias).then((res) => {
+        axios.get("api" + alias).then((res) => {
             if (res.data.status === "Error") {
                 this.setState({
                     author: "Author not found",
@@ -43,4 +42,4 @@ class Note extends React.Component {
     }
 }
 
-export default Note;
+export default GetNotes;

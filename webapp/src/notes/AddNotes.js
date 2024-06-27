@@ -1,7 +1,6 @@
 import React from "react";
-import Url from "../Constants.js"
 
-class AddNote extends React.Component {
+class AddNotes extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -28,8 +27,6 @@ class AddNote extends React.Component {
                     (e) => this.setState({alias: e.target.value})
                 }/>
                 <button type="button" onClick={() => {
-                    console.log(Url.Url);
-                    console.log(123);
                     if (this.state.title === ""
                         || this.state.note === ""
                         || this.state.author === ""
@@ -47,7 +44,7 @@ class AddNote extends React.Component {
                         alias: this.state.alias,
                     });
 
-                    fetch(Url.Url + "/record", {
+                    fetch("api/record", {
                     method: "POST",
                     body: json,
                     headers: {
@@ -70,4 +67,4 @@ class AddNote extends React.Component {
     }
 }
 
-export default AddNote
+export default AddNotes

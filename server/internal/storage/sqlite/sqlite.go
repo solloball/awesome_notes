@@ -9,11 +9,11 @@ import (
     "github.com/solloball/aws_note/internal/storage"
 )
 
-type Storage struct {
+type StorageSQLite struct {
     db *sql.DB
 }
 
-func New(storagePath string) (*Storage, error) {
+func New(storagePath string) (storage.Storage, error) {
     const op = "storage.sqlite.New"
 
     db, err := sql.Open("sqlite3", storagePath)
@@ -39,10 +39,10 @@ func New(storagePath string) (*Storage, error) {
     }
 
 
-    return &Storage{db: db}, nil
+    return &StorageSQLite{db: db}, nil
 }
 
-func (s *Storage) SaveRecord (rec storage.Record, alias string) (int64, error) {
+func (s *StorageSQLite) SaveRecord (rec storage.Record, alias string) (int64, error) {
         const op = "storage.sqlite.saveRecord"
 
         stmt, err := s.db.Prepare(
@@ -64,7 +64,7 @@ func (s *Storage) SaveRecord (rec storage.Record, alias string) (int64, error) {
         return id, nil
     }
 
-func (s *Storage) GetRecord(alias string) (storage.Record, error) {
+func (s *StorageSQLite) GetRecord(alias string) (storage.Record, error) {
     const op = "storage.sqlite.GetRecord"
 
 

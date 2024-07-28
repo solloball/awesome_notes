@@ -11,3 +11,8 @@ type Record struct {
     Note string
     Author string
 }
+
+type Storage interface {
+    SaveRecord (rec Record, alias string) (int64, error)
+    GetRecord(alias string) (Record, error)
+}

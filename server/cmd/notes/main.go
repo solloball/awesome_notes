@@ -14,7 +14,7 @@ import (
     "github.com/go-chi/cors"
 
     "github.com/solloball/aws_note/internal/config"
-    "github.com/solloball/aws_note/internal/storage/sqlite"
+    "github.com/solloball/aws_note/internal/storage/psql"
     "github.com/solloball/aws_note/internal/http-server/handlers/record/save"
     "github.com/solloball/aws_note/internal/http-server/handlers/record/get"
     "github.com/solloball/aws_note/internal/logger/sl"
@@ -36,7 +36,7 @@ func main() {
     logger.Info("start notes", slog.String("env", conf.Env))
     logger.Debug("debug mode is enabled")
 
-    storage, err := sqlite.New(conf.StoragePath)
+    storage, err := psql.New(conf.StoragePath)
     if err != nil {
         logger.Error("failed to init storage", sl.Err(err))
         os.Exit(1)
@@ -56,6 +56,7 @@ func main() {
         AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
         ExposedHeaders:   []string{"Link"},
         AllowCredentials: false,
+
         MaxAge:           300, // Maximum value not ignored by any of major browsers
     }))
 

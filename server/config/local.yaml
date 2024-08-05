@@ -1,5 +1,5 @@
 env: "local"  # dev, local, prod
-sttorage_path: "./storage/storage.db"
+sttorage_path: "postgresql://postgres:qwerty@db/db?sslmode=disable"
 http_server:
   address: "0.0.0.0:8080"
   timeout: 4s

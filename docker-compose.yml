@@ -1,20 +1,32 @@
-version: '3'
+version: '3.5'
 
 services:
   client:
     image: client
-    ports: 
-      - "5001:3000"
     build:
       context: ./webapp
       dockerfile: Dockerfile
+
   backend:
     image: server
-    ports: 
-      - "5000:8080"
+    depends_on:
+      db:
+        condition: service_started
     build:
       context: ./server
       dockerfile: Dockerfile
+
+  db:
+    container_name: db
+    image: postgres
+    volumes:
+      - ./.database/postgres/data:/var/lib/postgres/data
+    restart: always
+    env_file:
+      - .env # The name of your environment file (the one at the repository root)
+    environment:
+      - POSTGRES_DB=db
+
   proxy:
     image: nginx:latest
     ports:

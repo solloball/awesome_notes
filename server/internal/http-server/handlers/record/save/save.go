@@ -26,7 +26,7 @@ type Response struct {
 }
 
 type RecordSaver interface {
-    SaveRecord (rec storage.Record, alias string) (int64, error)
+    SaveRecord (rec storage.Record, alias string) (error)
 }
 
 // TODO: move to config
@@ -69,7 +69,7 @@ func New(log *slog.Logger, recordSaver RecordSaver) http.HandlerFunc {
             alias = random.NewRandomString(aliasLength, time.Now().UnixNano())
         }
 
-        id, err := recordSaver.SaveRecord(req.Record, alias)
+        err := recordSaver.SaveRecord(req.Record, alias)
         if err != nil {
             log.Info("failed to save url", sl.Err(err))
             
@@ -77,9 +77,6 @@ func New(log *slog.Logger, recordSaver RecordSaver) http.HandlerFunc {
 
             return
         }
-
-        log.Info("url added", slog.Int64("id", id))
-
 
         render.JSON(w, r, Response{
             Response: response.OK(),

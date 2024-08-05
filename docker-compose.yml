@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 
 services:
   client:
@@ -8,13 +8,30 @@ services:
     build:
       context: ./webapp
       dockerfile: Dockerfile
+
   backend:
     image: server
+    depends_on:
+      - db
     ports: 
       - "5000:8080"
     build:
       context: ./server
       dockerfile: Dockerfile
+
+  db:
+    container_name: db
+    ports: 
+      - "5433:5432"
+    image: postgres
+    volumes:
+      - ./.database/postgres/data:/var/lib/postgres/data
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=qwerty
+      - POSTGRES_DB=db
+
+
   proxy:
     image: nginx:latest
     ports:

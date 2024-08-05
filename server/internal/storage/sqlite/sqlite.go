@@ -42,26 +42,21 @@ func New(storagePath string) (storage.Storage, error) {
     return &StorageSQLite{db: db}, nil
 }
 
-func (s *StorageSQLite) SaveRecord (rec storage.Record, alias string) (int64, error) {
+func (s *StorageSQLite) SaveRecord (rec storage.Record, alias string) (error) {
         const op = "storage.sqlite.saveRecord"
 
         stmt, err := s.db.Prepare(
             "INSERT INTO record(title, note,  author, alias) VALUES(?, ?, ?, ?)")
         if err != nil {
-            return 0, fmt.Errorf("%s: %w", op, err)
+            return fmt.Errorf("%s: %w", op, err)
         }
 
-        res, err := stmt.Exec(rec.Title, rec.Note, rec.Author, alias)
+        _, err = stmt.Exec(rec.Title, rec.Note, rec.Author, alias)
         if err != nil {
-            return 0, fmt.Errorf("%s: %w", op, err)
+            return fmt.Errorf("%s: %w", op, err)
         }
 
-        id, err := res.LastInsertId()
-        if err != nil {
-            return 0, fmt.Errorf("%s: %w", op, err)
-        }
-        
-        return id, nil
+        return nil
     }
 
 func (s *StorageSQLite) GetRecord(alias string) (storage.Record, error) {

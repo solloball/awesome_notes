@@ -13,6 +13,6 @@ type Record struct {
 }
 
 type Storage interface {
-    SaveRecord (rec Record, alias string) (int64, error)
+    SaveRecord (rec Record, alias string) (error)
     GetRecord(alias string) (Record, error)
 }
